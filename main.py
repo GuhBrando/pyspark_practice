@@ -3,6 +3,7 @@ from numpy import where
 import pyspark as spark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
+import os
 
 teste = SparkSession\
         .builder\
@@ -12,7 +13,8 @@ teste = SparkSession\
         .getOrCreate()
 
 def openFile(fileName):
-    FILE = r"C:\Users\TheDa\Documents\GitHub\spark-essentials-4.3-spark-sql-exercises\src\main\resources\data\{}".format(fileName)
+    currentLocation = os.getcwd()
+    FILE = r"{}\pyspark_practice\spark-essentials-4.3-spark-sql-exercises\src\main\resources\data\{}".format(currentLocation, fileName)
     df = teste.read.option("inferSchema","true").json(FILE)
     return df
 
