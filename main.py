@@ -1,12 +1,12 @@
 from re import X
 import findspark
 from numpy import where
-import pyspark as spark
+import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 import os
 
-teste = SparkSession\
+spark = SparkSession\
         .builder\
         .appName('teste')\
         .config("spark.master", "local")\
@@ -16,7 +16,7 @@ teste = SparkSession\
 def openFile(fileName):
     currentLocation = os.getcwd()
     FILE = r"{}\pyspark_practice\spark-essentials-4.3-spark-sql-exercises\src\main\resources\data\{}".format(currentLocation, fileName)
-    df = teste.read.option("inferSchema","true").json(FILE)
+    df = spark.read.option("inferSchema","true").json(FILE)
     return df
 
 def main():
